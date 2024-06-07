@@ -6,17 +6,22 @@ builds:
   - CGO_ENABLED=0
   goos:
   - linux
-  - darwin
-  - windows
+  # - darwin
+  # - windows
   goarch:
   - amd64
-  - arm64
+  # - arm64
 
   flags:
     # trims path
     - -trimpath
   ldflags: 
-     - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser -X main.treeState={{ .IsGitDirty }}
+  - -X sigs.k8s.io/release-utils/version.gitVersion=<GitVersion>
+  - -X sigs.k8s.io/release-utils/version.gitCommit=<GitCommit
+  - -X sigs.k8s.io/release-utils/version.gitTreeState=<GitTreeState>
+  - -X sigs.k8s.io/release-utils/version.buildDate=<BuildDate>
+  
+  
   #   # CommitDate makes the release reproducible
     # - -X main.Version={{ .Tag }}
     # - -X .Runtime.Goarch={{ .Arch }}
@@ -26,7 +31,7 @@ builds:
     # - -X main.GitTreeState={{ .GitTreeState }}
 
 
-checksum:
+# checksum:
   # name_template: 'checksums.txt'
 
 source:
