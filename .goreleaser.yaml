@@ -15,17 +15,18 @@ builds:
   flags:
     # trims path
     - -trimpath
-  ldflags:
+  ldflags: 
+     - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser -X main.treeState={{ .IsGitDirty }}
   #   # CommitDate makes the release reproducible
-    - -X main.Version={{ .Tag }}
-    - -X .Runtime.Goarch={{ .Arch }}
-    - -X .Runtime.Gooss={{ .Os }}
-    - -X main.Date={{ .CommitDate }}
-    - -X main.Commit={{ .FullCommit }}
-    - -X main.GitTreeState={{ .GitTreeState }}
+    # - -X main.Version={{ .Tag }}
+    # - -X .Runtime.Goarch={{ .Arch }}
+    # - -X .Runtime.Gooss={{ .Os }}
+    # - -X main.Date={{ .CommitDate }}
+    # - -X main.Commit={{ .FullCommit }}
+    # - -X main.GitTreeState={{ .GitTreeState }}
 
 
-# checksum:
+checksum:
   # name_template: 'checksums.txt'
 
 source:
